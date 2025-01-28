@@ -9,13 +9,18 @@ let i = 0;
 const quoteSpace = document.querySelector(".quote");
 
 
-
-
-
+function randomNumber() {
+    return Math.floor(Math.random() * quotes.length);
+}
 
 window.onload = function randomQuote() {
-    const random = Math.floor(Math.random() * quotes.length);
+    let random = randomNumber();
 
-    quoteSpace.innerHTML = `"${quotes[random]}"`;
-
+    if (localStorage.getItem("prevNum") == random) {
+        random = randomNumber();
+        quoteSpace.innerHTML = `"${quotes[random]}"`;
+    } else {
+        quoteSpace.innerHTML = `"${quotes[random]}"`;
+        localStorage.setItem("prevNum", random)
+    }
 }
